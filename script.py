@@ -88,6 +88,9 @@ def visualize(source) -> graphviz.Graph:
                 code = ast.unparse(ast_node)
                 graph.node(decl_id, code)
                 return decl_id
+            # These AST types have no meaningful representation in a flowchart.
+            case ast.Import() | ast.ImportFrom():
+                pass
             case _:
                 raise NotImplementedError(f"Unhandled node type: {ast_node.__class__.__name__}: {ast_node}")
 
